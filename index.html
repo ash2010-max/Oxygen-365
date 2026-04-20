@@ -68,15 +68,14 @@ body{
   --dur-hero:         500ms;
 }
 
-/* ── Global touch feedback ── */
-*:active:not(input):not(textarea):not(select){
-  transform:scale(.97);
-  transition:transform var(--dur-instant) var(--ease-accelerate) !important;
-}
+/* ── Global touch feedback (scale only, no translateY) ── */
 button:active,
 .qc:active,.ac-card:active,.pm:active,.drawer-item:active,
-.exam-sub-box:active,.ru-card:active{
-  transform:scale(.95) !important;
+.exam-sub-box:active,.ru-card:active,.exam-cat-header:active,
+.apw-submit:active,.apw-cancel:active{
+  transform:scale(.96) !important;
+  transition:transform 80ms ease !important;
+  opacity:.88 !important;
 }
 
 /* ── Ink Ripple (Flutter InkWell) ── */
@@ -94,8 +93,8 @@ button:active,
 
 /* ── Flutter Hero / Shared Axis Transitions ── */
 @keyframes heroEnter{
-  from{opacity:0;transform:scale(.88) translateY(24px)}
-  to  {opacity:1;transform:scale(1)   translateY(0)}
+  from{opacity:0;transform:scale(.97)}
+  to  {opacity:1;transform:scale(1)}
 }
 @keyframes fadeIn{
   from{opacity:0}
@@ -106,17 +105,16 @@ button:active,
   to  {opacity:0;transform:scale(.92)}
 }
 @keyframes sharedAxisX{
-  from{opacity:0;transform:translateX(60px)}
-  to  {opacity:1;transform:translateX(0)}
+  from{opacity:0}
+  to  {opacity:1}
 }
 @keyframes sharedAxisXBack{
-  from{opacity:0;transform:translateX(-60px)}
-  to  {opacity:1;transform:translateX(0)}
+  from{opacity:0}
+  to  {opacity:1}
 }
 @keyframes fadeThrough{
-  0%  {opacity:0;transform:scale(.92)}
-  40% {opacity:0}
-  100%{opacity:1;transform:scale(1)}
+  0%  {opacity:0}
+  100%{opacity:1}
 }
 
 /* ── Screen transitions ── */
@@ -125,8 +123,8 @@ button:active,
 
 /* ── Stagger children ── */
 @keyframes staggerIn{
-  from{opacity:0;transform:translateY(0)}
-  to  {opacity:1;transform:translateY(0)}
+  from{opacity:0}
+  to  {opacity:1}
 }
 .stagger-children > *{
   animation:fadeIn var(--dur-normal) var(--ease-standard) both;
@@ -159,9 +157,9 @@ button:active,
 
 /* ── Flutter Float Button effect ── */
 @keyframes floatUp{
-  0%  {transform:translateY(0) scale(1)}
-  50% {transform:translateY(-8px) scale(1.05)}
-  100%{transform:translateY(0) scale(1)}
+  0%  {transform:scale(1)}
+  50% {transform:scale(1.04)}
+  100%{transform:scale(1)}
 }
 .float-btn{animation:floatUp 3s ease-in-out infinite}
 
@@ -172,8 +170,8 @@ button:active,
     box-shadow   var(--dur-normal) var(--ease-standard);
 }
 .flutter-card:hover{
-  transform:translateY(-4px) scale(1.01);
-  box-shadow:0 12px 32px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.1);
+  transform:scale(1.02);
+  box-shadow:0 8px 24px rgba(0,0,0,.12);
 }
 
 /* ── Spring scale on tap ── */
@@ -249,15 +247,15 @@ button:active,
 
 /* ── Ticker tape result number ── */
 @keyframes tickerUp{
-  from{transform:translateY(20px);opacity:0}
-  to  {transform:translateY(0);opacity:1}
+  from{opacity:0;transform:scale(.9)}
+  to  {opacity:1;transform:scale(1)}
 }
 .ticker{animation:tickerUp var(--dur-normal) var(--ease-decelerate) both}
 
 /* ── Card flip (flip to reveal answer) ── */
 @keyframes flipIn{
-  0%  {transform:perspective(600px) rotateX(-90deg);opacity:0}
-  100%{transform:perspective(600px) rotateX(0deg);opacity:1}
+  0%  {opacity:0;transform:scale(.9)}
+  100%{opacity:1;transform:scale(1)}
 }
 .flip-in{animation:flipIn var(--dur-slow) var(--ease-spring) both}
 
@@ -301,8 +299,8 @@ button:active,
     border-color var(--dur-fast)   var(--ease-standard) !important;
 }
 .ac-card:hover{
-  transform:translateY(-5px) scale(1.02) !important;
-  box-shadow:0 16px 40px rgba(0,0,0,.12),0 4px 12px rgba(255,214,0,.15) !important;
+  transform:scale(1.02) !important;
+  box-shadow:0 8px 28px rgba(0,0,0,.1),0 2px 8px rgba(255,214,0,.12) !important;
 }
 
 /* ── Button press animation ── */
@@ -314,14 +312,11 @@ button:active,
     box-shadow var(--dur-normal)  var(--ease-standard) !important;
 }
 .btn-primary:hover,.acr-btn:hover,.adm-btn-pub:hover{
-  transform:scale(1.02) !important;
-  box-shadow:0 8px 24px rgba(255,214,0,.35) !important;
+  opacity:.92 !important;
 }
 
 /* ── Result screen number animation ── */
-.rt-n,.ac-stat-n,.drs-num,.ty-score{
-  animation:tickerUp var(--dur-slow) var(--ease-decelerate) both;
-}
+
 
 /* ── Drawer avatar flutter ── */
 .drawer-avatar{
@@ -331,22 +326,18 @@ button:active,
 
 /* ── Tab bar icon bounce ── */
 @keyframes tabIconBounce{
-  0%,100%{transform:translateY(0) scale(1)}
-  30%    {transform:translateY(-5px) scale(1.2)}
-  60%    {transform:translateY(-2px) scale(1.05)}
+  0%,100%{transform:scale(1)}
+  30%    {transform:scale(1.25)}
+  60%    {transform:scale(1.08)}
 }
 
 /* ── Floating label animation (form inputs) ── */
-.form-input:focus + .form-label,
-.form-input:not(:placeholder-shown) + .form-label{
-  animation:staggerIn var(--dur-normal) var(--ease-spring) both;
-}
+
 
 /* ── OTP box focus spring ── */
 .otp-input:focus{
   border-color:#FFD600 !important;
   box-shadow:0 0 0 3px rgba(255,214,0,.2) !important;
-  animation:popIn var(--dur-fast) var(--ease-spring);
 }
 .apw-otp-box:focus{
   border-color:#FFD600 !important;
@@ -387,7 +378,7 @@ button:active,
 .star-btn{
   transition:transform var(--dur-fast) var(--ease-spring),filter var(--dur-fast) !important;
 }
-.star-btn:hover{transform:scale(1.3) rotate(10deg) !important}
+.star-btn:hover{transform:scale(1.3) !important}
 .star-btn.active{
   animation:iconBounce var(--dur-normal) var(--ease-spring) !important;
   transform:scale(1.25) !important;
@@ -398,16 +389,16 @@ button:active,
   animation:heroEnter var(--dur-hero) var(--ease-spring) .1s both !important;
 }
 .ty-emoji{animation:iconBounce .6s var(--ease-spring) .4s both}
-.ty-title{animation:staggerIn var(--dur-normal) var(--ease-decelerate) .5s both}
-.ty-sub  {animation:staggerIn var(--dur-normal) var(--ease-decelerate) .6s both}
+.ty-title{animation:fadeIn var(--dur-normal) var(--ease-decelerate) .5s both}
+.ty-sub  {animation:fadeIn var(--dur-normal) var(--ease-decelerate) .6s both}
 .ty-score{animation:numberPop var(--dur-slow)   var(--ease-spring)     .7s both}
-.ty-btn  {animation:staggerIn var(--dur-normal) var(--ease-decelerate) .9s both}
+.ty-btn  {animation:fadeIn var(--dur-normal) var(--ease-decelerate) .9s both}
 
 /* ── Splash animation enhanced ── */
 .splash-core{animation:heroEnter .8s var(--ease-spring) .3s both}
-.splash-title{animation:staggerIn var(--dur-slow) var(--ease-decelerate) .6s both}
-.splash-sub  {animation:staggerIn var(--dur-slow) var(--ease-decelerate) .8s both}
-.splash-bar  {animation:staggerIn var(--dur-slow) var(--ease-decelerate) 1s both}
+.splash-title{animation:fadeIn var(--dur-slow) var(--ease-decelerate) .6s both}
+.splash-sub  {animation:fadeIn var(--dur-slow) var(--ease-decelerate) .8s both}
+.splash-bar  {animation:fadeIn var(--dur-slow) var(--ease-decelerate) 1s both}
 
 /* ── Admin role cards ── */
 .ac-role-card{
@@ -419,8 +410,8 @@ button:active,
 .ac-role-card:nth-child(3){animation-delay:80ms}
 .ac-role-card:nth-child(4){animation-delay:160ms}
 .ac-role-card:hover{
-  transform:translateY(-6px) scale(1.02) !important;
-  box-shadow:0 16px 48px rgba(0,0,0,.12) !important;
+  transform:scale(1.02) !important;
+  box-shadow:0 8px 28px rgba(0,0,0,.1) !important;
 }
 
 /* ══════════════════════════════════════
@@ -439,7 +430,7 @@ button,input,select,textarea{font-family:var(--font-ui)}
 /* ══ SCREEN SYSTEM ══ */
 .screen{display:none;position:fixed;inset:0;max-width:480px;margin:0 auto;background:var(--O-bg);overflow-y:auto;z-index:10}
 .screen.active{display:flex;flex-direction:column;animation:screenIn .28s ease}
-@keyframes screenIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes screenIn{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:scale(1)}}
 
 /* ══ SPLASH ══ */
 #scrSplash{
@@ -826,7 +817,7 @@ button,input,select,textarea{font-family:var(--font-ui)}
   transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;
   display:flex;align-items:stretch;
 }
-.ru-card:hover{transform:translateY(-3px) scale(1.01);box-shadow:0 8px 28px rgba(0,87,255,.13)}
+.ru-card:hover{transform:scale(1.01);box-shadow:0 4px 16px rgba(0,0,0,.08)}
 .ru-card:active{transform:scale(.98)}
 .ru-accent{width:5px;flex-shrink:0}
 .ru-body{flex:1;padding:12px 14px}
@@ -874,7 +865,7 @@ button,input,select,textarea{font-family:var(--font-ui)}
   box-shadow:var(--sh);overflow:hidden;
   transition:box-shadow .2s;
 }
-.exam-cat-card:hover{box-shadow:var(--sh-md)}
+.exam-cat-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
 .exam-cat-header{
   display:flex;align-items:center;gap:12px;padding:14px 16px;
   cursor:pointer;transition:background .15s;user-select:none;
@@ -919,7 +910,7 @@ button,input,select,textarea{font-family:var(--font-ui)}
   transition:transform .18s cubic-bezier(.34,1.56,.64,1), border-color .18s, box-shadow .18s;
   display:flex;align-items:center;gap:8px;
 }
-.exam-sub-box:hover{transform:scale(1.03);border-color:var(--O-blue);box-shadow:0 3px 12px rgba(0,87,255,.12)}
+.exam-sub-box:hover{transform:scale(1.02);border-color:var(--O-blue);box-shadow:0 2px 10px rgba(0,87,255,.1)}
 .exam-sub-box:active{transform:scale(.97)}
 .exam-sub-box.selected{border-color:var(--O-blue);background:var(--O-blue-light);box-shadow:0 0 0 2px rgba(0,87,255,.18)}
 .esb-check{
@@ -940,16 +931,16 @@ button,input,select,textarea{font-family:var(--font-ui)}
 ════════════════════════════════ */
 
 /* Page transitions */
-@keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pageIn{from{opacity:0}to{opacity:1}}
 @keyframes popIn{0%{opacity:0;transform:scale(.88)}60%{transform:scale(1.04)}100%{opacity:1;transform:scale(1)}}
-@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideUp{from{opacity:0}to{opacity:1}}
 @keyframes ripple{0%{transform:scale(0);opacity:.5}100%{transform:scale(4);opacity:0}}
 @keyframes selectPulse{0%{box-shadow:0 0 0 0 rgba(0,87,255,.4)}70%{box-shadow:0 0 0 10px rgba(0,87,255,0)}100%{box-shadow:0 0 0 0 rgba(0,87,255,0)}}
-@keyframes iconBounce{0%,100%{transform:translateY(0) scale(1)}30%{transform:translateY(-6px) scale(1.15)}60%{transform:translateY(-2px) scale(1.05)}}
+@keyframes iconBounce{0%,100%{transform:scale(1)}30%{transform:scale(1.2)}60%{transform:scale(1.08)}}
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 @keyframes checkmark{0%{transform:scale(0) rotate(-30deg);opacity:0}70%{transform:scale(1.2) rotate(5deg);opacity:1}100%{transform:scale(1) rotate(0deg);opacity:1}}
 @keyframes glowPulse{0%,100%{opacity:.6}50%{opacity:1}}
-@keyframes cardEntry{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes cardEntry{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
 @keyframes rowSlideIn{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
 @keyframes tabActiveSlide{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 
@@ -962,7 +953,7 @@ button,input,select,textarea{font-family:var(--font-ui)}
   box-shadow:var(--sh);
 }
 .exam-box:hover{
-  transform:translateY(-4px) scale(1.02);
+  transform:scale(1.02);
   box-shadow:0 8px 28px rgba(0,87,255,.14);
 }
 .exam-box:active{transform:scale(.96)}
@@ -1025,7 +1016,7 @@ button,input,select,textarea{font-family:var(--font-ui)}
   box-shadow:var(--sh);
   position:relative;overflow:hidden;
 }
-.subj-box:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 6px 20px rgba(0,87,255,.13)}
+.subj-box:hover{transform:scale(1.03);box-shadow:0 3px 12px rgba(0,87,255,.1)}
 .subj-box:active{transform:scale(.94)}
 .subj-box.selected{
   border-color:var(--O-blue);background:var(--O-blue-light);
@@ -1078,7 +1069,7 @@ button,input,select,textarea{font-family:var(--font-ui)}
 .test-card:nth-child(2){animation-delay:.10s}
 .test-card:nth-child(3){animation-delay:.15s}
 .test-card:nth-child(4){animation-delay:.20s}
-.test-card:hover{transform:translateY(-5px) scale(1.01);box-shadow:0 12px 36px rgba(0,87,255,.15)}
+.test-card:hover{transform:scale(1.02);box-shadow:0 4px 16px rgba(0,87,255,.1)}
 .test-card:active{transform:scale(.98)}
 
 /* Test card start button pulse */
@@ -1097,7 +1088,7 @@ button,input,select,textarea{font-family:var(--font-ui)}
   box-shadow:var(--sh);border:1px solid var(--O-border);cursor:pointer;
   transition:transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s;flex-shrink:0;
 }
-.qc:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 8px 24px rgba(0,87,255,.15)}
+.qc:hover{transform:scale(1.04);box-shadow:0 4px 16px rgba(0,87,255,.12)}
 .qc:active{transform:scale(.95)}
 .qc-icon{font-size:24px;margin-bottom:6px;display:block;transition:transform .2s}
 .qc:hover .qc-icon{transform:scale(1.2) rotate(-5deg)}
@@ -1626,7 +1617,7 @@ button,input,select,textarea{font-family:var(--font-ui)}
 }
 .thankyou-overlay.open{display:flex}
 @keyframes tyBounce{0%{opacity:0;transform:scale(.5)}60%{transform:scale(1.12)}80%{transform:scale(.96)}100%{opacity:1;transform:scale(1)}}
-@keyframes tyFadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes tyFadeUp{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
 @keyframes tyPulseRing{0%{transform:scale(.8);opacity:.8}70%{transform:scale(1.5);opacity:0}100%{transform:scale(.8);opacity:0}}
 @keyframes tyStars{0%{transform:rotate(0deg) scale(0);opacity:0}50%{opacity:1}100%{transform:rotate(360deg) scale(1.2);opacity:0}}
 @keyframes tyPulseRing{0%{transform:scale(.8);opacity:.8}100%{transform:scale(2);opacity:0}}
@@ -2131,7 +2122,7 @@ button,input,select,textarea{font-family:var(--font-ui)}
   padding:20px;cursor:pointer;transition:all .2s;
   box-shadow:0 2px 12px rgba(0,0,0,.05);
 }
-.ac-role-card:hover{border-color:#FFD600;box-shadow:0 4px 20px rgba(255,214,0,.2);transform:translateY(-2px)}
+.ac-role-card:hover{border-color:#FFD600;box-shadow:0 4px 20px rgba(255,214,0,.2);transform:scale(1.01)}
 .ac-role-card.super{border-left:4px solid #FFD600}
 .ac-role-card.normal{border-left:4px solid #E50000}
 .acr-header{display:flex;align-items:center;gap:12px;margin-bottom:10px}
@@ -2191,7 +2182,7 @@ button,input,select,textarea{font-family:var(--font-ui)}
   box-shadow:0 1px 8px rgba(0,0,0,.04);
   display:flex;flex-direction:column;gap:8px;
 }
-.ac-card:hover{border-color:#FFD600;box-shadow:0 4px 16px rgba(255,214,0,.15);transform:translateY(-2px)}
+.ac-card:hover{border-color:#FFD600;box-shadow:0 4px 16px rgba(255,214,0,.15);transform:scale(1.01)}
 .ac-card:active{transform:scale(.97)}
 .ac-card-icon{
   width:40px;height:40px;border-radius:10px;
